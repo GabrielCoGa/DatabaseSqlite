@@ -9,8 +9,13 @@ books_file = 'books.json'
 
 def create_book_table():
     try:
-        with open(books_file, 'w') as file:
-            pass #No hacemos nada, solo crear el fichero
+        connecion = sqlite3.connect('books.db?)')
+        cursor = connection.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
+        connection.commit()
+        connection.close()
+
+
     except FileExistsError:
         pass #El fichero ya existe, no pasa nada
     except OSError as e:

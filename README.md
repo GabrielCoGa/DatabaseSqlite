@@ -4,10 +4,14 @@
 
 En el fichero Filedatabase.py creamos la base de datos y la tabla que vamos a utilizar
 > connection = sqlite3.connect('books.db?)')
-    cursor = connection.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
-    connection.commit()
-    connection.close()
+
+ > cursor = connection.cursor()
+
+>cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
+
+>connection.commit()
+
+>connection.close()
 
 
 Como vemos solo hace falta el fichero que maneja la base de datos, que en este caso es un fichero de texto.

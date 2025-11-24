@@ -1,10 +1,14 @@
 # Serie Bases de Datos con Python
-## Ficheros
-### JSON
+## Sqlite
 
 
-En el fichero Filedatabase.py declaramos el nombre del fichero
-> books_file = 'book.txt'
+En el fichero Filedatabase.py creamos la base de datos y la tabla que vamos a utilizar
+> connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
+    connection.commit()
+    connection.close()
+
 
 Como vemos solo hace falta el fichero que maneja la base de datos, que en este caso es un fichero de texto.
 El fichero de la aplicacion app.py, practicamente no hace falta modificarlo a excepcion de esta sentencia:

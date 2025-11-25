@@ -22,20 +22,35 @@ def create_book_table():
         print(f"Error al crear el fichero: {e}")
 
 
-def _save_all_books(books): #el simbolo _ quiere decir que es una funcion privada por convencion
-    try:
-        with open(books_file, 'w') as file:
-            json.dump(books, file)
-                
-    except OSError as e:
-        print(f"Error al guardar los libros: {e}")
+def _save_all_books(bonoks): #el simbolo _ quiere decir que es una funcion privada por convencion
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    #cursor.execute(f'INSERT INTO books VALUES(?, ?, ?)', (book['name'], book['author'], int(book['read'])))
+    cursor.execute(f'SELECT * FROM books')
+
+    connection.commit()
+    connection.close()
         
     
 def add_book(name, author):
-    books = get_all_books()
-    books.append({'name': name, 'author': author, 'read': False})
-    _save_all_books(books)
+    # ", 0); DROP TABLE books; --"
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    
+    #basicamente inseguro:
+    cursor.execute(f'INSERT INTO books VALUES("{name}", "{author}", 0)')
 
+    #SQL Injection Attack Example:
+    #cursor.execute(f'INSERT INTO books VALUES("{name}", "", 0); DROP TABLE books;", 0')
+
+    #con una lista de tuplas
+    #cursor.execute(f'INSERT INTO books VALUES(?, ?, ?)', (book['name'], book['author'], int(book['read'])))
+
+    cursor.execute(f'INSERT INTO books VALUES( ?, ?, 0)', (name, author))
+
+    connection.commit()
+    connection.close()
+    
 
 def get_all_books():
     try:

@@ -40,7 +40,7 @@ def list_books():
     books_return = get_all_books()
 
     for book_return in books_return:
-        read = 'YES' if book_return['read'] else 'NO'
+        read = 'YES' if book_return['read'] else 'NO'# if 1 = YES else 0 NO
         print("author {} with title {} read {}".format(book_return['author'], book_return['name'], read))
 
 def prompt_read_book():

@@ -79,15 +79,21 @@ def mark_book_as_read(name):
     cursor = connection.cursor()
     
     cursor.execute('UPDATE books SET read = 1 WHERE name = ?', (name,))
+    #(name,)in ordet to say that is a tuple with one element
 
     connection.commit()
     connection.close()
 
 
 def delete_book(name):
-   books = get_all_books()
-   books = [book for book in books if book['name'] != name]
-   _save_all_books(books)
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    
+    cursor.execute('DELETE FROM books WHERE name = ?', (name,))
+
+    connection.commit()
+    connection.close()
+   
 
         
 

@@ -66,7 +66,9 @@ def get_all_books():
     cursor = connection.cursor()
     
     cursor.execute('SELECT * FROM books')
-    """books = cursor.fetchall()# Tupla de tuplas [(name, author, read), (name, author, read)]"""
+    """
+    books = cursor.fetchall()# Tupla de tuplas [(name, author, read), (name, author, read)]
+    """
     books = [{
         'name': book[0],
         'author': book[1],

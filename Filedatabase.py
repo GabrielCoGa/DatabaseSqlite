@@ -5,13 +5,16 @@ Concerned with storing and retrieving books from a Database
 """
 import sqlite3
 
-books_file = 'books.json'
-
 def create_book_table():
     try:
-        connection = sqlite3.connect('books.db?)')
+        """
+        with.... as....:
+            pass
+        management context"""
+
+        connection = sqlite3.connect('books.db')
         cursor = connection.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
+        cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text primary key, author text, read integer)''')
         connection.commit()
         connection.close()
 
@@ -23,11 +26,11 @@ def create_book_table():
     
 def add_book(name, author):
     # ", 0); DROP TABLE books; --"
-    connection = sqlite3.connect('books.db?)')
+    connection = sqlite3.connect('books.db')
     cursor = connection.cursor()
     
     #basicamente inseguro:
-    cursor.execute(f'INSERT INTO books VALUES("{name}", "{author}", 0)')
+    #cursor.execute(f'INSERT INTO books VALUES("{name}", "{author}", 0)')
 
     #SQL Injection Attack Example:
     #cursor.execute(f'INSERT INTO books VALUES("{name}", "", 0); DROP TABLE books;", 0')
@@ -35,7 +38,7 @@ def add_book(name, author):
     #con una lista de tuplas
     #cursor.execute(f'INSERT INTO books VALUES(?, ?, ?)', (book['name'], book['author'], int(book['read'])))
 
-    cursor.execute(f'INSERT INTO books VALUES( ?, ?, 0)', (name, author))
+    cursor.execute('INSERT INTO books VALUES( ?, ?, 0)', (name, author))
 
     connection.commit()
     connection.close()
@@ -43,7 +46,7 @@ def add_book(name, author):
 
 def get_all_books():
     """ 
-    connection = sqlite3.connect('books.db?)')
+    connection = sqlite3.connect('books.db')
     cursor = connection.cursor()
     
     cursor.execute('SELECT * FROM books')
@@ -59,7 +62,7 @@ def get_all_books():
         })
     return books
     """
-    connection = sqlite3.connect('books.db?)')
+    connection = sqlite3.connect('books.db')
     cursor = connection.cursor()
     
     cursor.execute('SELECT * FROM books')
@@ -75,7 +78,7 @@ def get_all_books():
 
 
 def mark_book_as_read(name):
-    connection = sqlite3.connect('books.db?)')
+    connection = sqlite3.connect('books.db')
     cursor = connection.cursor()
     
     cursor.execute('UPDATE books SET read = 1 WHERE name = ?', (name,))
@@ -86,7 +89,7 @@ def mark_book_as_read(name):
 
 
 def delete_book(name):
-    connection = sqlite3.connect('books.db?)')
+    connection = sqlite3.connect('books.db')
     cursor = connection.cursor()
     
     cursor.execute('DELETE FROM books WHERE name = ?', (name,))

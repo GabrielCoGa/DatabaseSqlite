@@ -19,18 +19,7 @@ def create_book_table():
     except FileExistsError:
         pass #El fichero ya existe, no pasa nada
     except OSError as e:
-        print(f"Error al crear el fichero: {e}")
-
-
-def _save_all_books(bonoks): #el simbolo _ quiere decir que es una funcion privada por convencion
-    connection = sqlite3.connect('books.db?)')
-
-    cursor = connection.cursor()
-    cursor.execute(f'SELECT * FROM books')
-
-    connection.commit()
-    connection.close()
-        
+        print(f"Error al crear el fichero: {e}")        
     
 def add_book(name, author):
     # ", 0); DROP TABLE books; --"
@@ -84,12 +73,15 @@ def get_all_books():
     connection.close()
     return books
 
+
 def mark_book_as_read(name):
-    books = get_all_books()
-    for book in books:
-        if book['name'] == name:
-            book['read'] = True
-    _save_all_books(books)
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    
+    cursor.execute('UPDATE books SET read = 1 WHERE name = ?', (name,))
+
+    connection.commit()
+    connection.close()
 
 
 def delete_book(name):

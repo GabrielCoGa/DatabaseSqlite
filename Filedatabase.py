@@ -1,6 +1,6 @@
 #https://youtu.be/4yEKWer4cVI?si=hZPuBqtvZYlgMv8p
 """
-Concerned with storing and retrieving books from a 
+Concerned with storing and retrieving books from a Database
 
 """
 import sqlite3
@@ -24,8 +24,8 @@ def create_book_table():
 
 def _save_all_books(bonoks): #el simbolo _ quiere decir que es una funcion privada por convencion
     connection = sqlite3.connect('books.db?)')
+
     cursor = connection.cursor()
-    #cursor.execute(f'INSERT INTO books VALUES(?, ?, ?)', (book['name'], book['author'], int(book['read'])))
     cursor.execute(f'SELECT * FROM books')
 
     connection.commit()
@@ -53,17 +53,36 @@ def add_book(name, author):
     
 
 def get_all_books():
-    try:
-        with open(books_file, 'r') as file:
-            return json.load(file)
-   
-    except FileNotFoundError:
-        print("El fichero no existe todavía, devolviendo lista vacía.")
-        return []
-    except Exception as e:
-        print(f"Error al leer el fichero: {e}")
-        return []
+    """ 
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT * FROM books')
+    books_from_db = cursor.fetchall()
+    connection.close()
 
+    books = []
+    for book in books_from_db:
+        books.append({
+            'name': book[0],
+            'author': book[1],
+            'read': True if book[2] == 1 else False
+        })
+    return books
+    """
+    connection = sqlite3.connect('books.db?)')
+    cursor = connection.cursor()
+    
+    cursor.execute('SELECT * FROM books')
+    """books = cursor.fetchall()# Tupla de tuplas [(name, author, read), (name, author, read)]"""
+    books = [{
+        'name': book[0],
+        'author': book[1],
+        'read': book[2]
+    } for book in cursor.fetchall()]
+
+    connection.close()
+    return books
 
 def mark_book_as_read(name):
     books = get_all_books()

@@ -19,12 +19,12 @@ El fichero de la aplicacion app.py, practicamente no hace falta modificarlo a ex
 
  > read = 'YES' if book_return['read'] else 'NO'
  
- por esta otra:
-
-> read = 'YES' if book_return['read'] else 'NO'
-
 Esta tambien:
 > books = [book for book in books if book['name'] != name]
+
+Hay dos versiones, los ficheros que llevan el numero 2 pertenecen a una version mas
+avanzada pues se les aplica *"context management"*, osea se le aplica otra capa mas
+separando la apetura y cierre de la conexion en otro fichero llamado **database_connection2.py**
 
 Para ver paso a paso como se desarrolla visitar el este video de youtube
 https://youtu.be/4yEKWer4cVI?si=hZPuBqtvZYlgMv8p

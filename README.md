@@ -3,11 +3,11 @@
 
 
 En el fichero Filedatabase.py creamos la base de datos y la tabla que vamos a utilizar
-> connection = sqlite3.connect('books.db?)')
+> connection = sqlite3.connect('books.db')
 
  > cursor = connection.cursor()
 
->cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text, author text, read integer)''')
+>cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text primary key, author text, read integer)''')
 
 >connection.commit()
 

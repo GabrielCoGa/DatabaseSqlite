@@ -3,21 +3,17 @@
 Concerned with storing and retrieving books from a Database
 
 """
-import sqlite3
+#import sqlite3
+from database_connection2 import DatabaseConnection
+
 
 def create_book_table():
-    try:
-        connection = sqlite3.connect('books.db')
+    """ context management example """
+    with DatabaseConnection() as connection:
         cursor = connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS books(name text primary key, author text, read integer)''')
-        connection.commit()
-        connection.close()
 
-    except FileExistsError:
-        pass #El fichero ya existe, no pasa nada
-    except OSError as e:
-        print(f"Error al crear el fichero: {e}")        
-    
+
 def add_book(name, author):
     # ", 0); DROP TABLE books; --"
     connection = sqlite3.connect('books.db')

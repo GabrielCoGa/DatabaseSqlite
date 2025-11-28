@@ -16,11 +16,14 @@ class DatabaseConnection:
         self.connection.close()
     """
    
-   def __init__():
-       pass
+   def __init__(self, host):
+       self.connection = None
+       self.host = host
    
    def __enter__(self):
-       return sqlite3.connect('books.db')
+       self.connection = sqlite3.connect(self.host)
+       return self.connection
    
    def __exit__(self, exc_type, exc_value, traceback):
-       pass
+       self.connection.commit()
+       self.connection.close

@@ -1,8 +1,13 @@
 # Serie Bases de Datos con Python
 ## Sqlite
 
+Hay dos versiones, los ficheros que llevan el numero 2 pertenecen a una version mas
+avanzada pues se les aplica *"context management"*, osea se le aplica otra capa mas
+separando la apetura y cierre de la conexion en otro fichero llamado **database_connection2.py**
 
-En el fichero Filedatabase.py creamos la base de datos y la tabla que vamos a utilizar
+En el fichero Filedatabase.py o en el fichero database_connection2.py creamos la base de datos,
+segun la version, y la tabla que vamos a utilizar
+
 > connection = sqlite3.connect('books.db')
 
  > cursor = connection.cursor()
@@ -14,7 +19,9 @@ En el fichero Filedatabase.py creamos la base de datos y la tabla que vamos a ut
 >connection.close()
 
 
-Como vemos solo hace falta el fichero que maneja la base de datos, que en este caso es un fichero de texto.
+Como vemos solo hace falta modificar el fichero que maneja la base de datos o bien crear uno nuevo, si 
+le añadimos una capa mas de aislamiento de cada cometido.
+
 El fichero de la aplicacion app.py, practicamente no hace falta modificarlo a excepcion de esta sentencia:
 
  > read = 'YES' if book_return['read'] else 'NO'
@@ -22,9 +29,6 @@ El fichero de la aplicacion app.py, practicamente no hace falta modificarlo a ex
 Esta tambien:
 > books = [book for book in books if book['name'] != name]
 
-Hay dos versiones, los ficheros que llevan el numero 2 pertenecen a una version mas
-avanzada pues se les aplica *"context management"*, osea se le aplica otra capa mas
-separando la apetura y cierre de la conexion en otro fichero llamado **database_connection2.py**
 
 Para ver paso a paso como se desarrolla visitar el este video de youtube
 https://youtu.be/4yEKWer4cVI?si=hZPuBqtvZYlgMv8p

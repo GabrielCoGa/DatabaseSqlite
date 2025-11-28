@@ -24,6 +24,10 @@ class DatabaseConnection:
        self.connection = sqlite3.connect(self.host)
        return self.connection
    
-   def __exit__(self, exc_type, exc_value, traceback):
-       self.connection.commit()
-       self.connection.close
+   def __exit__(self, exc_type, exc_value, exc_traceback):
+        #if exc_type or exc_value or exc_traceback:
+        if exc_type is not None or exc_value is not None or exc_traceback is not None:
+            self.connection.close()
+        else:
+            self.connection.commit()
+            self.connection.close

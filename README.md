@@ -1,7 +1,8 @@
 # Serie Bases de Datos con Python
-## Sqlite SQL
 ## Sqlite ORM - SQLAlchemy
-
+## Sqlite - SQLModel
+>----------------------------------------------------------------------------------------------
+### Sqlite SQL
 Hay dos versiones, la primera version es inciaria, la segunda es una version mas
 avanzada pues se les aplica *"context management"*, osea se le aplica otra capa mas
 separando la apetura y cierre de la conexion en otro fichero llamado **database_connection2.py**
@@ -30,11 +31,51 @@ El fichero de la aplicacion app.py, practicamente no hace falta modificarlo a ex
 Para ver paso a paso como se desarrolla visitar el este video de youtube:
 https://youtu.be/4yEKWer4cVI?si=hZPuBqtvZYlgMv8p
 
-
+### Sqlite ORM - SQLAlchemy
 Para ver paso a paso como se desarrolla la version 3 visitar el este video de youtube:
 https://youtu.be/xr7vDSFXjW0?si=bMK_uNbwnIbvztuO
 
-Para crear el entorno virtual para instalar SQLAlchemy visitar el capitulo de este video de youtube:
+En el fichero **main.py** tenemos el codigo de creacion de la base de datos y una tabla:
+
+>from sqlalchemy import Column, Integer, String, ForeignKey, Sequence, create_engine
+>from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+
+>engine  = create_engine('sqlite:///orm.db')
+
+>Session = sessionmaker( bind=engine)
+>session = Session()
+
+>Base = declarative_base()
+
+>class User(Base):
+ >   __tablename__ = 'users'
+ >  id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+ >   name = Column(String(50))
+ >   email = Column(String(50))
+
+>Base.metadata.create_all(engine)
+
+En el fichero **mainrelationships.py** tenemos como montar una relacion entre dos tablas de la base de datos:
+
+>class User(Base):
+ >   __tablename__ = 'users'
+ >  id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+ >   name = Column(String(50))
+ >   email = Column(String(50))
+
+ >   posts = relationship('Post', back_populates='user')
+
+>class Post(Base):
+ >   __tablename__ = 'posts'
+ >   id = Column(Integer, Sequence('post_id_seq'), primary_key=True)
+ >   title = Column(String(100))
+ >   content = Column(String(500))
+ >   user_id = Column(Integer, ForeignKey('users.id'))
+
+ >   user = relationship('User', back_populates='posts')
+
+
+Para crear el ***entorno virtual*** para instalar SQLAlchemy visitar el capitulo de este video de youtube:
 https://youtu.be/eGwuHtRaFrM?si=J8kX7POTs43mG80Q
 
 

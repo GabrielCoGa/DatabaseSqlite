@@ -3,7 +3,10 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Sequence, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-engine  = create_engine('sqlite:///orm_relationships.db')
+#engine  = create_engine('sqlite:///orm_relationships.db')
+
+#show SQL statements with echo=True
+engine  = create_engine('sqlite:///orm_relationships.db', echo=True)
 
 Session = sessionmaker( bind=engine)
 session = Session()
@@ -45,4 +48,14 @@ posts_with_user = session.query(Post, User).join(User).all()
 for post, user in posts_with_user:
     print(f'Post Title: {post.title}, Author: {user.name}, Email: {user.email}')
 
+alice = session.query(User).filter(User.name == 'Alice').first()
+for post in alice.posts:
+    print(f'\nAlice Post Title: {post.title}, Content: {post.content}') 
+
+alice_posts = session.query(Post).join(User).filter(User.name == 'Alice').all()
+print("\nPosts by Alice:")
+for post in alice_posts:
+    print(f'Post Title: {post.title}, Content: {post.content}')
+
+# Close the session
 session.close()

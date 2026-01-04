@@ -24,7 +24,6 @@ class Post(Base):
     title = Column(String(100))
     content = Column(String(500))
     user_id = Column(Integer, ForeignKey('users.id'))
-    user = relationship('User', back_populates='posts')
 
     user = relationship('User', back_populates='posts')
 
@@ -32,38 +31,18 @@ Base.metadata.create_all(engine)
 
 user1 = User(name='Alice', email='alice@example.com')
 user2 = User(name='Bob', email='bob@example.com')
-
+post1 = Post(title='Alice First Post', content='This is the content of the Alice first post.', user=user1)
+post2 = Post(title='Bob First Post', content='This is the content of the Bob first post.', user=user2)
+post3 = Post(title='Alice Second Post', content='This is the content of the Alice second post.', user=user1)
+  
 #insert data:
-session.add_all([user1, user2])
+session.add_all([user1, user2, post1, post2, post3])
 session.commit()
 
 #query data:
-user = session.query(User).filter_by(name=('Alice')).first()
-if user is not None:
-    print(f'User: {user.name}, Email: {user.email}')
+posts_with_user = session.query(Post, User).join(User).all()
 
-#delete data:
-    session.delete(user)
-    session.commit()
-
-#verify deletion
-user = session.query(User).filter_by(name='Alice').first()
-if user is None:
-    print('User Alice has been deleted.')
-else:
-    print(f'User: {user.name}, Email: {user.email}')
-
-#update data:
-session.query(User).filter(User.name == 'Bob').update(
-    {User.email: 'bob_new@example.com'}
-)
-
-session.commit()
-
-#verify update
-user = session.query(User).filter_by(name='Bob').first()
-if user is not None:
-    print(f'User: {user.name}, Email: {user.email}')
-
+for post, user in posts_with_user:
+    print(f'Post Title: {post.title}, Author: {user.name}, Email: {user.email}')
 
 session.close()

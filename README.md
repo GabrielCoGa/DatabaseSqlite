@@ -33,6 +33,8 @@ Para ver paso a paso como se desarrolla visitar el este video de youtube:
 https://youtu.be/4yEKWer4cVI?si=hZPuBqtvZYlgMv8p
 
 ### Sqlite ORM - SQLAlchemy
+Para visitar el sitio oficial: https://www.sqlalchemy.org/
+
 Para ver paso a paso como se desarrolla la version 3 visitar el este video de youtube:
 https://youtu.be/xr7vDSFXjW0?si=bMK_uNbwnIbvztuO
 
@@ -79,7 +81,7 @@ En el fichero **mainrelationships.py** tenemos como montar una relacion entre do
 Para crear el ***entorno virtual*** para instalar SQLAlchemy visitar el capitulo de este video de youtube:
 https://youtu.be/eGwuHtRaFrM?si=J8kX7POTs43mG80Q
 
-
+Instalamos y activamos el entorno virutal:
 > python3 -m pip install --user --upgrade pip
 
 > python3 -m pip install --user virtualenv
@@ -90,19 +92,32 @@ https://youtu.be/eGwuHtRaFrM?si=J8kX7POTs43mG80Q
 
 > source bin/activate
 
+Instalamos SQLAlchemy:
 >  pip3 install sqlalchemy
 
 Se puede desativar el entorno virtual con:
-
 >  deactivate
 
 Para volverlo a activar:
-
 > source bin/activate
 
 ### Sqlite - SQLModel
+para visitar el sitio oficial: https://sqlmodel.tiangolo.com/
+
 Para ver paso a paso como se desarrolla la version 4 visitar el este video de youtube:
 https://youtu.be/RU6Fk6bmBk8?si=xM1OxX_l1tjDNvG5
+
+Dentro del directorio de trabajo activamos el entorno virtual, como ya vimos anteriormente:
+> python3 -m venv version_4
+
+> cd version_4
+
+> source bin/activate
+
+Instalamos SQLModel:
+>  pip3 install sqlmodel
+
+
 
 Otro ejemplo paso a paso:
 https://betterstack.com/community/guides/scaling-python/sqlmodel-orm/

@@ -1,7 +1,7 @@
-version_1/*.db
-version_2/*.db
-version_3/*.db
-version_3/bin/
-version_3/include/
-version_3/lib/
+/version_1/*.db
+/version_2/*.db
+/version_3/*.db
+/version_3/bin/
+/version_3/include/
+/version_3/lib/
 version_3/pyvenv.cfg

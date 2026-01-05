@@ -98,3 +98,10 @@ Se puede desativar el entorno virtual con:
 Para volverlo a activar:
 
 > source bin/activate
+
+### Sqlite - SQLModel
+Para ver paso a paso como se desarrolla la version 4 visitar el este video de youtube:
+https://youtu.be/RU6Fk6bmBk8?si=xM1OxX_l1tjDNvG5
+
+Otro ejemplo paso a paso:
+https://betterstack.com/community/guides/scaling-python/sqlmodel-orm/

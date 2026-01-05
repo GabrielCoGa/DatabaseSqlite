@@ -4,4 +4,9 @@
 /version_3/bin/
 /version_3/include/
 /version_3/lib/
-version_3/pyvenv.cfg
+/version_3/pyvenv.cfg
+/version_4/*.db
+/version_4/bin/
+/version_4/include/
+/version_4/lib/
+/version_4/pyvenv.cfg

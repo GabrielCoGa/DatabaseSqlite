@@ -104,6 +104,24 @@ Para volverlo a activar:
 ### Sqlite - SQLModel
 para visitar el sitio oficial: https://sqlmodel.tiangolo.com/
 
+SqlModel es la mezcla de ORM SQLAlchemy y Pydantic.
+
+Pydantic is the most widely used data validation and parsing library for Python. As of 2026, it remains a cornerstone of the Python ecosystem, utilized for ensuring data integrity by leveraging native Python type hints.
+Para visital el sitio oficial: https://docs.pydantic.dev/latest/
+
+Ejemplo:
+>from pydantic import BaseModel
+
+>class User(BaseModel):
+ >   id: int
+ >   name: str
+ >   is_active: bool = True  # Default value
+
+># Validation and Parsing
+>user = User(id="123", name="John Doe") 
+>print(user.id)  # Output: 123 (automatically converted from string to int)
+
+
 Para ver paso a paso como se desarrolla la version 4 visitar el este video de youtube:
 https://youtu.be/RU6Fk6bmBk8?si=xM1OxX_l1tjDNvG5
 

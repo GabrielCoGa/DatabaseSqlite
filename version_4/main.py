@@ -16,3 +16,7 @@ class Book(SQLModel, table=True):
     author_id: int | None = Field(default=None, foreign_key="author.id")
     
     author: Author = Relationship(back_populates="books")
+
+    SQLModel.metadata.create_all(engine)
+
+    

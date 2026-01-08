@@ -117,7 +117,7 @@ Ejemplo:
  >   name: str
  >   is_active: bool = True  # Default value
 
-># Validation and Parsing
+>#Validation and Parsing
 >user = User(id="123", name="John Doe") 
 >print(user.id)  # Output: 123 (automatically converted from string to int)
 
